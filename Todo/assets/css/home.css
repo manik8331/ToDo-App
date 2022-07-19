@@ -1,0 +1,370 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu&display=swap');
+
+*{
+    box-sizing: border-box;
+}
+
+a{
+    text-decoration: none;
+}
+body {
+    background: aliceblue;
+}
+
+
+
+/* main box for todo list*/
+.container {
+    margin: auto;
+    max-width: 600px;
+    position: relative
+}
+
+.todoBlock {
+    padding: 30px;
+    margin-top: 50px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: -9px 17px 13px rgb(0 0 0 / 16%);
+}
+
+
+
+/* title css */
+.titleHolder h1 {
+    text-transform: uppercase;
+    color: brown;
+    font-family: sans-serif;
+    display:inline-block
+}
+/* search btn css start here */
+.header-search{
+    position: relative;
+}
+
+.search-container {
+    position:absolute;
+    right:0;
+    top:12px;
+}
+/* search text  */
+.search-container input[type=text] {
+    padding: 6px;
+    margin-top: 8px;
+    font-size: 17px;
+    outline: none;
+    border-radius: 20px;
+    border:1px solid white;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+}
+/* search icon */
+.search-container button {
+    position:absolute;
+    right:1px;
+    top:9px;
+    padding: 6px 10px;
+    border-radius: 20px;
+    background-color: white;
+    color:rgb(85, 195, 247);
+    font-size: 17px;
+    border: none;
+    cursor: pointer;
+}
+
+
+/* give width and height for show task */
+
+.todoList {
+    width: 100%;
+    height: 480px;
+}
+
+/* Give some padding list class inside ul tag */
+
+ul.list {
+    padding:22px; 
+} 
+
+.list li {
+    list-style: circle;
+    padding: 15px;
+    font-family: system-ui;
+    font-weight: 600;
+}
+
+.listHolder {
+    height: 480px;
+    overflow: scroll;
+}
+
+/* scrollbar css start here */
+::-webkit-scrollbar {
+    width: 3px;
+}
+::-webkit-scrollbar-thumb {
+    background: brown;
+    border-radius: 30%;
+}
+
+
+
+
+/*------- list ui design css start here -------*/
+
+.listIcon{
+    position: relative;
+    border:1px solid rgb(255, 255, 255);
+    box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
+    margin-bottom: 12px;
+    cursor: pointer;
+}
+ 
+ 
+ /* delete and task complete box css here */
+.delete-complete{
+    position:absolute;
+    right:4px;
+    top:3px;
+}
+.delete-complete i{
+    margin:4px;
+}
+ 
+ /* delete box css here */
+.fa-trash{
+    color:black;
+}
+ .fa-trash:hover{
+    color: rgba(235, 36, 36, 0.904);
+    transform: scale(1.2) rotateY(180deg);
+    transition:0.3s;
+}
+ /* task complete css here  */
+.fa-check:hover{
+    color: #00c479;
+    font-weight: 700;
+    transform: scale(1.2);
+    transition:0.3s;
+}
+
+/* after click on task complete */
+.checked {
+    background: rgb(116, 245, 137);
+    color: #fff;
+    text-decoration: line-through;
+}
+.complete-task{
+    display: none;
+}
+/* text task complete style here */
+.checked .complete-task{
+    position: absolute;
+    display: inline-block;
+    top: 48px;
+    left: 196px;
+    font-size: 1rem;
+}
+ 
+ /* task ui css  */
+#item{
+    width:250px ;
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: 500;
+}
+ 
+ 
+ /* category ui css*/
+ .category-content {
+    display: inline-block;
+    position: absolute;
+    top: 30px;
+    right: 90px;
+    color: #9d1fabde;
+    background-color: #f0d8f3;
+    box-shadow: rgb(50 50 93 / 25%) 0px 6px 12px -2px, rgb(0 0 0 / 30%) 0px 3px 7px -3px;
+    width: 80px;
+    height: 30px;
+    font-family: 'Luxurious Roman', cursive;
+    text-align: center;
+    border-radius: 15px;
+    padding:2px 0px;
+}
+ 
+ /* date ui css */
+ #date{
+    margin-top:5px;
+    color:grey;
+    font-size: 0.9rem;
+ }
+
+
+
+
+
+/*------ pop-up page open button css start here ----*/
+.add-btn{
+    position: absolute;
+    margin-left:240px;
+    width:64px;
+    height:64px;
+    background-color: rgb(56, 106, 243);
+    border-radius: 50%;
+    padding: 13px 15px;
+}
+.fa-plus{
+    color: white;
+    font-size:2.4rem ;
+    transition: ease-in-out 0.5s;
+}
+
+.add-btn:hover .fa-plus:hover{
+    transform: scale(0.8) rotate(90deg);
+}
+
+
+
+/*------- ---------pop up page for task add css start here ------------*/
+
+.modal-container {
+  background-color: rgba(0, 0, 0, 0.5);
+  bottom: 0;
+  left: 0;
+  opacity: 0;
+  padding: 30px;
+  pointer-events: none;
+  position: absolute;
+  right: 0;
+  top: 0;
+  visibility: hidden;
+  transition: all 0.3s ease-in-out;
+}
+.modal-container:target {
+    opacity: 1;
+    pointer-events: auto;
+    visibility: visible;
+}
+.modal-inner {
+    background: white;
+    left: 50%;
+    max-width: 630px;
+    height:260px;
+    padding: 20px;
+    position: relative;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    border-radius: 5px;
+}
+
+
+/* pop-up page close button css   */
+.modal-close {
+  color: rgba(231, 55, 55, 0.884);
+  display: flex;
+  font-family: Arial;
+  font-size: 30px;
+  font-weight: 700;
+  justify-content: flex-end;
+  text-decoration: none;
+}
+
+
+
+/* css on label tag  */
+label{
+    color:#e268ce ; 
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+/* add task input css */
+input#task {
+    padding: 8px 12px;
+    margin-top:8px;
+    width:76%;
+    height:35px;
+    outline: none;
+    border:1px solid white;
+    box-shadow: rgba(242, 0, 255, 0.55)1.95px 1.95px 2.6px;
+}
+
+
+.category-date-grp{
+    margin:8px 0px;
+    display:flex;
+    justify-content: space-between;
+}
+
+
+/* category menu  css here */
+.category{
+    margin:10px 0px
+}
+#category{
+    width:12vw;
+    height:35px;
+    outline: none;
+    border:1px solid white;
+    box-shadow: rgba(242, 0, 255, 0.55) 1.95px 1.95px 2.6px;
+    outline: none;
+}
+  
+#category option{
+    font-size: 16px;
+    color:slategray;
+    background-color: rgb(249, 221, 255);
+}
+select:required:invalid{
+    color:grey;
+    font-size: 15px;
+}
+
+
+/*------DATE css start here-----*/
+.date{
+    margin:6px 0px;
+}
+input[type="date"]{
+    width:12vw;
+    height:35px;
+    border:1px solid white;
+    box-shadow: rgba(242, 0, 255, 0.55) 1.95px 1.95px 2.6px;
+}
+input[type="date"]:focus{
+    outline:none;
+}
+
+
+/*---- Add task button css ----*/
+.btn-box{
+    margin:35px 220px;
+}
+.button {
+  background-color: #fd63d7;
+  border:1px solid white;
+  border-radius: 8px;
+  color: white;
+  display: inline-block;
+  font-family: Arial;
+  font-size: 20px;
+  height: 40px;
+  padding: 0 20px;
+  text-decoration: none;
+  cursor: pointer;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+}
+
+/* some hover effect on add task button */
+.button:hover {
+    transform: scale(0.93);
+    transition: 0.2s;
+}
+
+/* some css on input placeholder */
+::placeholder{
+    font-size:15px;
+}
+
+/*------- ---------pop up page css end here ------------*/
+
+

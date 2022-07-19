@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+  <title>ToDo App</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Add css file -->
+  <link rel="stylesheet" href="/css/home.css">
+
+  <!-- add fontawesomeicon parent link -->
+  <script src="https://kit.fontawesome.com/d0c6f360c1.js" crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+  <!---------------Main Box-------->
+
+  <div class="container">
+    <div class="todoBlock">
+      <!-- main title and search bar holder -->
+      <div class="header-search">
+        <div class="titleHolder">
+          <h1>To Do LIST</h1>
+        </div>
+        <div class="search-container">
+          <form action="/search" method="POST">
+            <input type="text" placeholder="Search.. By Category" name="searchCategory">
+            <button type="submit"><i class="fa fa-search"></i></button>
+          </form>
+        </div>
+      </div>
+
+
+
+      <!-- todo list -->
+      <div class="todoList">
+        <!-- list holder -->
+        <div class="listHolder" id="listHolder">
+          <ul class="list" id="lists">
+            <% for(let i of Todo_list){%>
+              <li class="listIcon">
+                <div id="item">
+                  <!-- task render from database -->
+                  <span>
+                    <%= i.task %>
+                  </span>
+                </div>
+                <div id="date">
+                  <!--date render from database -->
+                  <span>
+                    <%= i.date %>
+                  </span>
+                </div>
+                <div class="complete-task">
+                  <span>
+                    Task Complete
+                  </span>
+                </div>
+                <div class="category-content">
+                  <!-- category render from database -->
+                  <span>
+                    <% if(i.category ==="Personal"){%>
+                      <%= i.category %>
+                    <%}%>
+                  </span>
+                  <span id="college">
+                    <% if(i.category ==="college"){%>
+                      <%= i.category %>
+                    <%}%>
+                  </span>
+                </div>
+                <!-- add delete icon and task complete icon -->
+                <div class="delete-complete">
+                  <i class="fas fa-check"></i>
+                  <a href="/delete-task/?id=<%= i._id %>">
+                    <i class="fas fa-trash"></i>
+                  </a>
+                </div>
+              </li>
+              <%}%>
+          </ul>
+        </div>
+      </div>
+
+
+      <!-- add button for add task page -->
+      <div class="add-btn">
+        <a href="#modal"><i class="fas fa-plus"></i></a>
+      </div>
+    </div>
+  </div>
+
+  <!-- -------- pop-up page html code where you add some task---- -->
+
+  <div id="modal" class="modal-container">
+    <div class="modal-inner">
+      <!-- add some  button to return original page -->
+      <a href="#" class="modal-close">X</a>
+
+
+      <div class="formHolder">
+
+        <!-- take some data from user and by post method to store in database -->
+        <form action="/" method="post">
+          <div class="col big">
+            <label for="task">Enter Task:</label>
+            <input id="task" type="text" name="task" placeholder="What do you need to do?" required>
+          </div>
+          <!-- category menu -->
+          <div class="category-date-grp">
+            <div class="category">
+              <label for="category">Category:</label>
+              <select name="category" id="category" required>
+                <option value="" selected hidden><span>Choose a Category</span></option>
+                <option value="Personal">Personal </option>
+                <option value="Work">Work</option>
+                <option value="college">college</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+            <!-- date picker -->
+            <div class="date">
+              <label for="date">Date:</label>
+              <input type="date" value="dd/mm/yyyy" id="date" name="date" placeholder="yyyy" default>
+            </div>
+          </div>
+
+          <!-- submit button -->
+          <div class="btn-box">
+            <button type="submit" class="button">Add Task</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <!-- Add javascript file -->
+  <script src="/js/home.js"></script>
+</body>
+
+</html>
